@@ -1,8 +1,6 @@
-
 const express = require("express")
 const notesData = require('../db/db');
 const fs = require("fs");
-const uuidv1 = require("uuid")
 
 console.log(notesData);
 
