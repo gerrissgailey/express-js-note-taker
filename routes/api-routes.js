@@ -1,8 +1,6 @@
 const express = require("express")
-const notesData = require('../db/db');
 const fs = require("fs");
-
-console.log(notesData);
+const { v4: uuidv4 } = require('uuid')
 
 module.exports = (app) => {
 
@@ -11,28 +9,30 @@ module.exports = (app) => {
   });
   
   app.post('/api/notes', (req, res) => {
-    
+
+    const notesData = JSON.parse(fs.readFileSync('./db/db.json', {encoding: 'utf8'}))
+
     let addNote = req.body;
     
     notesData.push(addNote);
     
-    addNote.id = notesData.indexOf(addNote)+1;
+    addNote.id = uuidv4();
     
-    fs.writeFileSync("./db/db.json", JSON.stringify(notesData));
+    fs.writeFile("./db/db.json", JSON.stringify(notesData), () => {
+      return res.json(addNote);
+    });
     
-    return res.json(JSON.parse(fs.readFileSync('./db/db.json')));
+    // return res.json(JSON.parse(fs.readFileSync('./db/db.json')));
     // res.json()
   });
   
   app.delete('/api/notes/:id', (req, res) => {
-    let id = parseInt(req.params.id);
-    let deleteItem = notesData.filter(item => item.id != id);
-    
-    deleteItem.forEach(element => element.id = deleteItem.indexOf(element));
+    const notesData = JSON.parse(fs.readFileSync('./db/db.json', {encoding: 'utf8'}))
+    let deleteItem = notesData.filter(item => item.id != req.params.id);
     
     fs.writeFileSync('./db/db.json', JSON.stringify(deleteItem));
-    
     return res.json(JSON.parse(fs.readFileSync('./db/db.json')));
+    
     // res.json()
   });
 };
