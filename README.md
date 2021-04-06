@@ -13,9 +13,12 @@ This is a note taking app designed with the ability to record and store the note
 * [Tests](#tests)
 * [Questions](#questions)
 ## Installation
-You will need to download the files in this package to your system and open it in VS Code. Navigate to the folder directory where the package files are located and install the Inquirer package by running 'npm i inquirer', and the Jest package by running 'npm i jest'. Once that is finished, you will run 'node index.js' from the terminal and follow the prompts in the command-line.
+You will need to download the files in this package to your system and open it in VS Code. Navigate to the folder directory where the package files are located install the required dependencies. Then server.js file can be run to start the application. 
+
+A live deployment of the app on Heroku can be found at [this link](https://stormy-coast-28421.herokuapp.com/).
+
 ## Usage
-Simply answer the question prompts in the command-line.
+Simply enter a note title and text body in the text fields and click the save button. Notes can be recalled by selecting from the list column at the left and can be deleted by clicking the red trashcan icon.
 ## Contributing
 Not at this time.
 ## Tests
